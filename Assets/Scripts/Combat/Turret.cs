@@ -7,8 +7,9 @@ public class Turret : MonoBehaviour
     [SerializeField] GameObject projectile;
     [SerializeField] float range;
     [SerializeField] TurretSize turretSize;
+    Health turretParent;
 
-    Vector3[] positions = new Vector3[2];
+    // Vector3[] positions = new Vector3[2];
 
     //Aim Assist
     //LineRenderer lineRenderer;
@@ -16,6 +17,7 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        turretParent = GetComponentInParent<Health>();
         // lineRenderer = GetComponent<LineRenderer>();
         // for (int i = 0; i < positions.Length; i++)
         // {
@@ -34,5 +36,8 @@ public class Turret : MonoBehaviour
     public void Fire()
     {
         GameObject shot = Instantiate(projectile, this.transform.position, this.transform.rotation);
+        Projectile projectileComponent = shot.GetComponent<Projectile>();
+        projectileComponent.SetRange(range);
+        projectileComponent.SetOrigin(turretParent.name); 
     }
 }

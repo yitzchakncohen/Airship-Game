@@ -33,6 +33,10 @@ public class CombatController : MonoBehaviour
         {
             FireRightWeapon();
         }
+        if(Input.GetKeyDown(leftWeaponKey))
+        {
+            FireLeftWeapon();
+        }
     }
 
     private void FireMainWeapon()
@@ -42,7 +46,10 @@ public class CombatController : MonoBehaviour
             if(slot.GetLocation() == TurretLocations.Main)
             {
                 Turret turret = slot.GetComponentInChildren<Turret>();
-                turret.Fire();
+                if(turret != null)
+                {
+                    turret.Fire();
+                }
             }
         }
     }
@@ -54,7 +61,25 @@ public class CombatController : MonoBehaviour
             if(slot.GetLocation() == TurretLocations.Right)
             {
                 Turret turret = slot.GetComponentInChildren<Turret>();
-                turret.Fire();
+                if(turret != null)
+                {
+                    turret.Fire();
+                }
+            }
+        }
+    }
+    
+    private void FireLeftWeapon()
+    {
+        foreach (TurretSlot slot in turretSlots)
+        {
+            if(slot.GetLocation() == TurretLocations.Left)
+            {
+                Turret turret = slot.GetComponentInChildren<Turret>();
+                if(turret != null)
+                {
+                    turret.Fire();
+                }
             }
         }
     }

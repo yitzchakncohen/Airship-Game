@@ -11,19 +11,23 @@ public class MovementController : MonoBehaviour
     [SerializeField] float burstMulitplier = 2f;
     [SerializeField] float burstLength = 3f;
     [SerializeField] float burstCoolDownLength = 10f;
+    [SerializeField] float climbAngle = 15f;
+    float climbAngleGrowing = 0f;
+    [SerializeField] float climbAngleSpeed = 0.5f;
+    [SerializeField] GameObject playerModel;
     [SerializeField] GameObject burstEffect;
     // [SerializeField] Animator animator;
 
     [SerializeField] public bool controllerEnabled = true;
-    [SerializeField] KeyCode speedBurstKey;
+    [SerializeField] public KeyCode speedBurstKey;
     [SerializeField] GameObject speedBurstUI;
 
     private Rigidbody rigidBody;
     private Vector3 inputs = Vector3.zero;
     private FaceNorth compassUI;
-    private bool isGrounded = true;
+    // private bool isGrounded = true;
     private bool burstActive = false;
-    float height = 0;
+    // float height = 0;
     float burstSpeed;
 
     void Start()
@@ -62,7 +66,7 @@ public class MovementController : MonoBehaviour
         {
             //If controller is enabled, move player with MovePosition or Velocity or addForce? TODO
             // rigidBody.MovePosition(rigidBody.position + movementVector);
-            rigidBody.velocity = movementVector*100;
+            rigidBody.velocity = movementVector * 100;
             // rigidBody.AddForce(movementVector*100);
 
             //Add rotation with RotateAround or Torue? TODO
@@ -70,31 +74,66 @@ public class MovementController : MonoBehaviour
             // rigidBody.AddTorque(transform.up * rotationAmount * 100);
             float movementSpeed = movementVector.magnitude;
             // animator.SetFloat("MoveSpeed", movementVector.magnitude*1.66f);
+
+            
         }
         else
         {
             // animator.SetFloat("MoveSpeed", 0);
         }
+        TiltShip(verticalMovement);
+    }
 
+    private void TiltShip(float verticalMovement)
+    {
+        //Tilt the ship while climbing
+        if (verticalMovement > 0)
+        {
+            if (climbAngleGrowing < climbAngle)
+            {
+                climbAngleGrowing += climbAngleSpeed;
+            }
+            playerModel.transform.eulerAngles = new Vector3(playerModel.transform.eulerAngles.x, playerModel.transform.eulerAngles.y, climbAngleGrowing);
+        }
+        else if (verticalMovement < 0)
+        {
+            if (climbAngleGrowing > -climbAngle)
+            {
+                climbAngleGrowing -= climbAngleSpeed;
+            }
+            playerModel.transform.eulerAngles = new Vector3(playerModel.transform.eulerAngles.x, playerModel.transform.eulerAngles.y, climbAngleGrowing);
+        }
+        else
+        {
+            if (climbAngleGrowing > 0)
+            {
+                climbAngleGrowing -= climbAngleSpeed;
+            }
+            else if (climbAngleGrowing < 0)
+            {
+                climbAngleGrowing += climbAngleSpeed;
+            }
+            playerModel.transform.eulerAngles = new Vector3(playerModel.transform.eulerAngles.x, playerModel.transform.eulerAngles.y, climbAngleGrowing);
+        }
     }
 
 
     //Check if player is on the ground, do I need this for this game?
-    private void isPlayerGrounded()
-    {
-        LayerMask mask = LayerMask.GetMask("Terrain");
-        if(Physics.CheckSphere(transform.position, 2, mask))
-        {
-            isGrounded = true;
-            // animator.SetBool("Grounded", true);
-        } 
-        else
-        {
-            isGrounded = false;
-            // animator.SetBool("Grounded", false);
-        }
-        // print(isGrounded);
-    }
+    // private void isPlayerGrounded()
+    // {
+    //     LayerMask mask = LayerMask.GetMask("Terrain");
+    //     if(Physics.CheckSphere(transform.position, 2, mask))
+    //     {
+    //         isGrounded = true;
+    //         // animator.SetBool("Grounded", true);
+    //     } 
+    //     else
+    //     {
+    //         isGrounded = false;
+    //         // animator.SetBool("Grounded", false);
+    //     }
+    //     // print(isGrounded);
+    // }
 
     //Update player speed
     public void UpdateSpeed(float newspeed){

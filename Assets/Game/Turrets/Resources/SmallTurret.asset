@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53eada50be85724e9b41d2a28ff472e, type: 3}
+  m_Name: SmallTurret
+  m_EditorClassIdentifier: 
+  itemID: d8bb74aa-8c45-45cb-a698-61d0f35eaceb
+  displayName: Small Turret
+  description: This is a leeeetle turret.
+  icon: {fileID: 21300000, guid: 4db017495c69e8140a56a0e2b669e3f8, type: 3}
+  pickup: {fileID: 7080590082509598332, guid: 2d96cf586e75d6645a0193d2f02d17db, type: 3}
+  stackable: 0
+  allowedEquipLocations: 01000000020000000300000004000000050000000600000000000000
+  turret: {fileID: 2473621151546674260, guid: 6093d7bcdcac74144987610a777bff19, type: 3}

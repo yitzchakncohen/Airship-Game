@@ -2,17 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameDevTV.Inventories;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] float healthPoints = 100;
+    [SerializeField] float maxHealthPoints = 100;
+    [SerializeField] private float healthPoints;
     [SerializeField] float timeBeforeDestroy = 1f;
     [SerializeField] GameObject deathFX;
+    Equipment equipment;
     bool dead = false;
+    float defaultMaxHealthPoints;
+    float lastArmourValue;
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthPoints = maxHealthPoints;
+        defaultMaxHealthPoints = maxHealthPoints;
+        equipment = GetComponent<Equipment>();
+        if(equipment)
+        {
+            print("Equipment Found");
+            equipment.equipmentUpdated += checkArmour; 
+        }
     }
 
     // Update is called once per frame
@@ -34,10 +46,39 @@ public class Health : MonoBehaviour
         return dead;
     }
 
+    public float GetHealth()
+    {
+        return healthPoints;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealthPoints;
+    }
+
     private void DestroyTarget()
     {
-        Instantiate(deathFX, transform.position, transform.rotation);
+        GameObject deathFXObject = Instantiate(deathFX, transform.position, transform.rotation);
         dead = true;
+        Destroy(deathFXObject, timeBeforeDestroy + 1f);
         Destroy(gameObject, timeBeforeDestroy);
     }
+
+    private void checkArmour()
+    {
+        ArmourItem armourItem = equipment.GetItemInSlot(EquipLocation.Armour) as ArmourItem;
+        if(armourItem)
+        {
+            maxHealthPoints = defaultMaxHealthPoints +armourItem.GetArmourAmount();
+            healthPoints = healthPoints + armourItem.GetArmourAmount();
+            lastArmourValue = armourItem.GetArmourAmount();
+        }
+        if(!armourItem)
+        {
+            healthPoints = healthPoints - lastArmourValue;
+            maxHealthPoints = defaultMaxHealthPoints;
+            lastArmourValue = 0f;
+        }
+    }
+
 }

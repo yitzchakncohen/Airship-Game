@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 0}
-  range: 0
+  range: 2000
   turretSize: 0
 --- !u!120 &-4711351459737105455
 LineRenderer:

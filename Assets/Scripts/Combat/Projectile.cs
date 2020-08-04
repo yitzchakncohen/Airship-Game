@@ -6,16 +6,22 @@ public class Projectile : MonoBehaviour
     [SerializeField] float speed = 1;
     // [SerializeField] bool isHoming = false;
     [SerializeField] GameObject hitEffect = null;
-    [SerializeField] float maxLifeTime = 10;
     [SerializeField] GameObject[] destroyOnHit = null;
     [SerializeField] float lifeAfterImpact = 10f;
     [SerializeField] UnityEvent onHit;
     Health target = null;
+    Shield shieldOfImpact = null;
     [SerializeField] float damage = 0;
+    [SerializeField] string origin;
+    SphereCollider sphereCollider;
+    MeshRenderer meshRenderer;
+    float maxLifeTime;
 
     private void Start()
     {
         // transform.LookAt(GetAimLocation());
+        meshRenderer = GetComponent<MeshRenderer>();
+        sphereCollider = GetComponent<SphereCollider>();
     }
 
     void Update()
@@ -27,6 +33,17 @@ public class Projectile : MonoBehaviour
         //     transform.LookAt(GetAimLocation());
         // }
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
+    public void SetRange(float range)
+    {
+        maxLifeTime = range / speed;
+        Destroy(gameObject, maxLifeTime);
+    }
+
+    public void SetOrigin(string name)
+    {
+        origin = name;
     }
 
     // public void SetTarget(Health target, GameObject instigator, float damage)
@@ -50,9 +67,24 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<Health>())
+        if (other.GetComponent<Shield>() && origin != "Player")
+        {
+            shieldOfImpact = other.gameObject.GetComponent<Shield>();
+            shieldOfImpact.TakeDamage(damage);
+            HitEffect();
+            DestroyProjectile();
+            return;
+        }
+
+        if (other.GetComponent<Health>() && origin != other.name)
         {
             target = other.gameObject.GetComponent<Health>();
+        }
+        else if (other.name == "Terrain")
+        {
+            HitEffect();
+            DestroyProjectile();
+            return;
         }
         else
         {
@@ -60,24 +92,38 @@ public class Projectile : MonoBehaviour
         }
 
         if (target.IsDead()) return;
-
-        target.GetComponent<Health>().TakeDamage(damage);
+        
+        if(origin != other.name)
+        {
+            target.GetComponent<Health>().TakeDamage(damage);
+        }
 
         speed = 0;
 
+        //TODO onhit?
         onHit.Invoke();
+        HitEffect();
+        DestroyProjectile();
+    }
 
-        if (hitEffect != null)
-        {
-            Instantiate<GameObject>(hitEffect, gameObject.transform.position, transform.rotation);
-        }
-
+    private void DestroyProjectile()
+    {
         foreach (GameObject toDestroy in destroyOnHit)
         {
             Destroy(toDestroy);
         }
-
+        meshRenderer.enabled = false;
+        sphereCollider.enabled = false;
         Destroy(gameObject, lifeAfterImpact);
+    }
+
+    private void HitEffect()
+    {
+        if (hitEffect != null)
+        {
+            GameObject hitEffectObject = Instantiate<GameObject>(hitEffect, gameObject.transform.position, transform.rotation);
+            Destroy(hitEffectObject, lifeAfterImpact);
+        }
     }
 }
 
