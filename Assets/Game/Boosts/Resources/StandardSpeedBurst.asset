@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87ada5068b3ab548b965cb161c9d8ff, type: 3}
+  m_Name: StandardSpeedBurst
+  m_EditorClassIdentifier: 
+  itemID: 0f388ca2-e5c1-4323-8796-2c45be997ed8
+  displayName: Standard Speed Burst
+  description: Faster I say!
+  icon: {fileID: 21300000, guid: 40ee96d6f43189441ba14c5c0e779437, type: 3}
+  pickup: {fileID: 426977805998407564, guid: 7201de27c751b7647a9cda783dcfd8a8, type: 3}
+  stackable: 0
+  allowedEquipLocations: 09000000
+  boost: {fileID: 6330663301925273982, guid: bd5c8ee99c76ed543ad7487a0aa2f9a5, type: 3}
+  boostFX: {fileID: 1721701065852284712, guid: 84d3a76fef2c193448c84e1694651ca1, type: 3}
+  speedBurstMultiplier: 3
+  burstLength: 4
+  burstCoolDown: 5

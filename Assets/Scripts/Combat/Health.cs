@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
         equipment = GetComponent<Equipment>();
         if(equipment)
         {
-            print("Equipment Found");
+            // print("Equipment Found");
             equipment.equipmentUpdated += checkArmour; 
         }
     }

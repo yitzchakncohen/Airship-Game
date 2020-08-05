@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameDevTV.Inventories;
 
 public class MovementController : MonoBehaviour
 {
@@ -9,19 +10,26 @@ public class MovementController : MonoBehaviour
     [SerializeField] float verticalSpeed = 1f;
     [SerializeField] float rotationSpeed = 1f;
     [SerializeField] float burstMulitplier = 2f;
+    [SerializeField] float defaultBurstMultiplier = 2f;
     [SerializeField] float burstLength = 3f;
+    [SerializeField] float defaultBurstlength = 3f;
     [SerializeField] float burstCoolDownLength = 10f;
+    [SerializeField] float defaultBurstCoolDownLength = 10f;
     [SerializeField] float climbAngle = 15f;
+    string burstFXName = "SpeedBurstEffect";
     float climbAngleGrowing = 0f;
     [SerializeField] float climbAngleSpeed = 0.5f;
     [SerializeField] GameObject playerModel;
-    [SerializeField] GameObject burstEffect;
+    [SerializeField] GameObject burstEffectObject;
+    [SerializeField] GameObject defaultBurstEffect;
     // [SerializeField] Animator animator;
 
     [SerializeField] public bool controllerEnabled = true;
     [SerializeField] public KeyCode speedBurstKey;
     [SerializeField] GameObject speedBurstUI;
-
+    
+    Equipment equipment;
+    BoostItem boostItem;
     private Rigidbody rigidBody;
     private Vector3 inputs = Vector3.zero;
     private FaceNorth compassUI;
@@ -34,8 +42,12 @@ public class MovementController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody>();
         compassUI = FindObjectOfType<FaceNorth>();
-        burstEffect.SetActive(false);
+        burstEffectObject.SetActive(false);
         speedBurstUI.SetActive(false);
+        equipment = GetComponent<Equipment>();
+        equipment.equipmentUpdated += speedBurstUpdate;
+        GameObject speedBurstEffect = Instantiate(defaultBurstEffect, burstEffectObject.transform);
+        speedBurstEffect.name = burstFXName; 
     }
 
     void Update()
@@ -139,6 +151,39 @@ public class MovementController : MonoBehaviour
     public void UpdateSpeed(float newspeed){
         speed = newspeed;
     }
+    
+    private void speedBurstUpdate()
+    {
+        boostItem = equipment.GetItemInSlot(EquipLocation.Boost) as BoostItem;
+        if(boostItem)
+        {
+            burstMulitplier = boostItem.GetBurst();
+            burstLength = boostItem.GetBurstLength();
+            burstCoolDownLength = boostItem.GetBurstCoolDown();
+            DestroyOldBurstEffect();
+            GameObject speedBurstEffect = Instantiate(boostItem.GetBurstFX(), burstEffectObject.transform);
+            speedBurstEffect.name = burstFXName;
+        }
+        else
+        {
+            burstMulitplier = defaultBurstMultiplier;
+            burstLength = defaultBurstlength;
+            burstCoolDownLength = defaultBurstCoolDownLength;
+            DestroyOldBurstEffect();
+            GameObject speedBurstEffect = Instantiate(defaultBurstEffect, burstEffectObject.transform);
+            speedBurstEffect.name = burstFXName; 
+        }
+    }
+    private void DestroyOldBurstEffect()
+    {
+        burstEffectObject.SetActive(true);
+        GameObject oldFX = GameObject.FindWithTag(burstFXName);
+        if(oldFX != null)
+        {
+            Destroy(oldFX);
+        }
+        burstEffectObject.SetActive(false);
+    }
 
     //Disable controller
     public void ToggleControl(bool onOrOff)
@@ -152,10 +197,10 @@ public class MovementController : MonoBehaviour
         burstSpeed = speed*burstMulitplier;
         float baseSpeed = speed;
         speed = burstSpeed;
-        burstEffect.SetActive(true);
+        burstEffectObject.SetActive(true);
         yield return StartCoroutine(burstWait());
         speed = baseSpeed;
-        burstEffect.SetActive(false);
+        burstEffectObject.SetActive(false);
         speedBurstUI.SetActive(true);
         speedBurstUI.GetComponent<SpeedBurstUI>().UpdateCircle(burstCoolDownLength);
         yield return StartCoroutine(burstCoolDown());
