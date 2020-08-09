@@ -7,7 +7,7 @@ public class Turret : MonoBehaviour
     [SerializeField] GameObject projectile;
     [SerializeField] float range;
     [SerializeField] TurretSize turretSize;
-    Health turretParent;
+    public Health turretParent;
 
     // Vector3[] positions = new Vector3[2];
 
@@ -38,6 +38,6 @@ public class Turret : MonoBehaviour
         GameObject shot = Instantiate(projectile, this.transform.position, this.transform.rotation);
         Projectile projectileComponent = shot.GetComponent<Projectile>();
         projectileComponent.SetRange(range);
-        projectileComponent.SetOrigin(turretParent.name); 
+        projectileComponent.SetOrigin(turretParent.name, turretParent.tag);
     }
 }

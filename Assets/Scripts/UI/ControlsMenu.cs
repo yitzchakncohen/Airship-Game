@@ -10,12 +10,13 @@ public class ControlsMenu : MonoBehaviour
     private Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
     private GameObject currentKey;
 
-    public TextMeshProUGUI forward, reverse, rotateLeft, rotateRight, up, down, mainFire, leftFire, rightFire; 
+    public TextMeshProUGUI forward, reverse, rotateLeft, rotateRight, up, down, mainFire, leftFire, rightFire, speedBurst; 
 
     [SerializeField] GameObject controlsCanvas;
     [SerializeField] Color32 normalColour;
     [SerializeField] Color32 selectedColour;
-    MovementController player;
+    MovementController playerMovementController;
+    CombatController playerCombatController;
 
     void Start()
     {
@@ -28,7 +29,15 @@ public class ControlsMenu : MonoBehaviour
         keys.Add("Fire Main", KeyCode.Space);
         keys.Add("Fire Left", KeyCode.LeftArrow);
         keys.Add("Fire Right", KeyCode.RightArrow);
+        keys.Add("Speed Burst", KeyCode.LeftShift);
+        UpdateButtonText();
 
+        playerMovementController = GameObject.FindObjectOfType<MovementController>();
+        playerCombatController = GameObject.FindObjectOfType<CombatController>();
+    }
+
+    private void UpdateButtonText()
+    {
         forward.text = keys["Forward"].ToString();
         reverse.text = keys["Reverse"].ToString();
         rotateLeft.text = keys["Rotate Left"].ToString();
@@ -38,8 +47,7 @@ public class ControlsMenu : MonoBehaviour
         mainFire.text = keys["Fire Main"].ToString();
         leftFire.text = keys["Fire Left"].ToString();
         rightFire.text = keys["Fire Right"].ToString();
-
-        player = GameObject.FindObjectOfType<MovementController>();
+        speedBurst.text = keys["Speed Burst"].ToString();
     }
 
     /// <summary>
@@ -56,6 +64,7 @@ public class ControlsMenu : MonoBehaviour
                 keys[currentKey.name] = e.keyCode;
                 currentKey.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = e.keyCode.ToString();
                 currentKey.GetComponent<Image>().color = normalColour;
+                updateControls();
                 currentKey = null; 
             }
         }
@@ -67,7 +76,6 @@ public class ControlsMenu : MonoBehaviour
         {
             currentKey.GetComponent<Image>().color = normalColour;
         }
-
         currentKey = clicked;
         currentKey.GetComponent<Image>().color = selectedColour;
     }
@@ -83,10 +91,22 @@ public class ControlsMenu : MonoBehaviour
         keys["Fire Main"] = KeyCode.Space;
         keys["Fire Left"] = KeyCode.LeftArrow;
         keys["Fire Right"] = KeyCode.RightArrow;
+        keys["Speed Burst"] = KeyCode.LeftShift;
+        UpdateButtonText();
+        updateControls();
     }
 
     private void updateControls()
     {
-        
+        playerMovementController.forwardPositive = keys["Forward"];
+        playerMovementController.forwardNegative = keys["Reverse"];
+        playerMovementController.rotateNegative = keys["Rotate Left"];
+        playerMovementController.rotatePositive = keys["Rotate Right"];
+        playerMovementController.verticalPositive = keys["Up"];
+        playerMovementController.verticalNegative = keys["Down"];
+        playerCombatController.mainWeaponKey = keys["Fire Main"];
+        playerCombatController.leftWeaponKey = keys["Fire Left"];
+        playerCombatController.rightWeaponKey = keys["Fire Right"];
+        playerMovementController.speedBurstKey = keys["Speed Burst"];
     }
 }

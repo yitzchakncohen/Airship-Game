@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 5324523503018271006}
   m_Layer: 0
   m_Name: SpeedBurstObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 3202546462231025333}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,12 @@ MonoBehaviour:
   defaultBurstEffect: {fileID: 1721701065852284712, guid: 11b915f6341130a47a37d57d0de6d155,
     type: 3}
   controllerEnabled: 1
+  forwardPositive: 119
+  forwardNegative: 115
+  rotatePositive: 100
+  rotateNegative: 97
+  verticalPositive: 273
+  verticalNegative: 274
   speedBurstKey: 304
   speedBurstUI: {fileID: 6215923280428206867}
 --- !u!114 &5179970764469175433
@@ -215,6 +221,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Turret Slot
+      objectReference: {fileID: 0}
+    - target: {fileID: 538529804957407024, guid: 456c53fb4ad616e40b975f93580c2e75,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 960991600756463618, guid: 456c53fb4ad616e40b975f93580c2e75,
         type: 3}
@@ -356,6 +367,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5019253577567174726, guid: 4c5184b0dfaa9aa4db6720d221a5437f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c5184b0dfaa9aa4db6720d221a5437f, type: 3}
 --- !u!1 &6215923280428206867 stripped
@@ -381,6 +397,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Turret Slot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 538529804957407024, guid: 456c53fb4ad616e40b975f93580c2e75,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 960991600756463618, guid: 456c53fb4ad616e40b975f93580c2e75,
         type: 3}
@@ -466,6 +487,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Turret Slot (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 538529804957407024, guid: 456c53fb4ad616e40b975f93580c2e75,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 960991600756463618, guid: 456c53fb4ad616e40b975f93580c2e75,
         type: 3}
@@ -607,6 +633,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniMapCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 3049281332151361626, guid: d26822ce746261645b904908e42af098,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d26822ce746261645b904908e42af098, type: 3}
 --- !u!4 &695284662066026672 stripped
@@ -625,6 +656,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ffc7550fbba6a4d9cb14f8e5adc0c7d8, type: 3}
       propertyPath: m_Name
       value: Space_Dreadnought_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ffc7550fbba6a4d9cb14f8e5adc0c7d8, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ffc7550fbba6a4d9cb14f8e5adc0c7d8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -756,6 +791,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8247462764624119943, guid: 07ba867daaa56f94a9f8b0493cccb2b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 9097009667413798266, guid: 07ba867daaa56f94a9f8b0493cccb2b9,
         type: 3}
       propertyPath: m_Enabled
@@ -780,6 +820,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Turret Slot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 538529804957407024, guid: 456c53fb4ad616e40b975f93580c2e75,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 960991600756463618, guid: 456c53fb4ad616e40b975f93580c2e75,
         type: 3}
@@ -866,6 +911,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Large Turret Slot
       objectReference: {fileID: 0}
+    - target: {fileID: 1561672570634909519, guid: a80a86adb172799418dd089aab351258,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2270713785081755773, guid: a80a86adb172799418dd089aab351258,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -946,6 +996,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Turret Slot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 538529804957407024, guid: 456c53fb4ad616e40b975f93580c2e75,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 960991600756463618, guid: 456c53fb4ad616e40b975f93580c2e75,
         type: 3}
@@ -1031,6 +1086,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Turret Slot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 538529804957407024, guid: 456c53fb4ad616e40b975f93580c2e75,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 960991600756463618, guid: 456c53fb4ad616e40b975f93580c2e75,
         type: 3}
@@ -1177,6 +1237,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShieldSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922512533563087732, guid: e529fdd08ae48c14fb998c0f0c479f19,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e529fdd08ae48c14fb998c0f0c479f19, type: 3}

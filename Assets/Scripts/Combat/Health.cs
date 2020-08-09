@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     [SerializeField] float timeBeforeDestroy = 1f;
     [SerializeField] GameObject deathFX;
     Equipment equipment;
+    Shield[] shields;
     bool dead = false;
     float defaultMaxHealthPoints;
     float lastArmourValue;
@@ -33,7 +34,8 @@ public class Health : MonoBehaviour
         if(healthPoints < 0)
         {
             DestroyTarget();
-        }     
+        }
+        checkShield();     
     }
 
     public void TakeDamage(float damage)
@@ -78,6 +80,18 @@ public class Health : MonoBehaviour
             healthPoints = healthPoints - lastArmourValue;
             maxHealthPoints = defaultMaxHealthPoints;
             lastArmourValue = 0f;
+        }
+    }
+
+    private void checkShield()
+    {
+        shields = this.GetComponentsInChildren<Shield>();
+        foreach (Shield shield in shields)
+        {
+            if(shield)
+            {
+                shield.SetShieldHost(gameObject);
+            }
         }
     }
 

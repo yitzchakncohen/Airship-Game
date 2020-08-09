@@ -12,7 +12,7 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 20
   m_Height: 108
-  m_Direction: 0
+  m_Direction: 2
   m_Center: {x: 3, y: 0, z: 0}
 --- !u!1001 &898092144304142121
 PrefabInstance:
@@ -21,6 +21,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 829642011220554772, guid: dc523482b8dbf444680142eed0b08e86,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1477076104214511253, guid: dc523482b8dbf444680142eed0b08e86,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2827895904193844705, guid: dc523482b8dbf444680142eed0b08e86,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -81,6 +91,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5474806483172053925, guid: dc523482b8dbf444680142eed0b08e86,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc523482b8dbf444680142eed0b08e86, type: 3}
 --- !u!1 &5155708366112744588 stripped
@@ -102,9 +117,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3118776120486437576}
     m_Modifications:
+    - target: {fileID: 100000, guid: 1939da864b4714da0924825ae71676db, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1939da864b4714da0924825ae71676db, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1939da864b4714da0924825ae71676db, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 1939da864b4714da0924825ae71676db, type: 3}
       propertyPath: m_Name
       value: SpaceDreadnought04
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 1939da864b4714da0924825ae71676db, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 1939da864b4714da0924825ae71676db, type: 3}
       propertyPath: m_LocalPosition.x

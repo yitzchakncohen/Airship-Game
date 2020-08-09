@@ -18,6 +18,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] float climbAngle = 15f;
     string burstFXName = "SpeedBurstEffect";
     float climbAngleGrowing = 0f;
+    float axisCalibration = 0.05f;
     [SerializeField] float climbAngleSpeed = 0.5f;
     [SerializeField] GameObject playerModel;
     [SerializeField] GameObject burstEffectObject;
@@ -25,6 +26,12 @@ public class MovementController : MonoBehaviour
     // [SerializeField] Animator animator;
 
     [SerializeField] public bool controllerEnabled = true;
+    [SerializeField] public KeyCode forwardPositive;
+    [SerializeField] public KeyCode forwardNegative;
+    [SerializeField] public KeyCode rotatePositive;
+    [SerializeField] public KeyCode rotateNegative;
+    [SerializeField] public KeyCode verticalPositive;
+    [SerializeField] public KeyCode verticalNegative;
     [SerializeField] public KeyCode speedBurstKey;
     [SerializeField] GameObject speedBurstUI;
     
@@ -53,10 +60,14 @@ public class MovementController : MonoBehaviour
     void Update()
     {
         // Control Inputs
-        inputs = Vector3.zero;
-        inputs.x = Input.GetAxis("Horizontal");
-        inputs.z = Input.GetAxis("Vertical");
-        inputs.y = Input.GetAxis("Height");
+        // inputs = Vector3.zero;
+        // inputs.x = Input.GetAxis("Horizontal");
+        // inputs.z = Input.GetAxis("Vertical");
+        // inputs.y = Input.GetAxis("Height");
+        inputs.x = CalculateInputAxis(Input.GetKey(rotatePositive), Input.GetKey(rotateNegative), inputs.x);
+        inputs.z = CalculateInputAxis(Input.GetKey(forwardPositive), Input.GetKey(forwardNegative), inputs.z);
+        inputs.y = CalculateInputAxis(Input.GetKey(verticalPositive), Input.GetKey(verticalNegative), inputs.y); 
+        
         if(Input.GetKeyDown(speedBurstKey) && !burstActive)
         {
             StartCoroutine(SpeedBurst());
@@ -87,7 +98,6 @@ public class MovementController : MonoBehaviour
             float movementSpeed = movementVector.magnitude;
             // animator.SetFloat("MoveSpeed", movementVector.magnitude*1.66f);
 
-            
         }
         else
         {
@@ -198,24 +208,60 @@ public class MovementController : MonoBehaviour
         float baseSpeed = speed;
         speed = burstSpeed;
         burstEffectObject.SetActive(true);
-        yield return StartCoroutine(burstWait());
+        yield return StartCoroutine(BurstWait());
         speed = baseSpeed;
         burstEffectObject.SetActive(false);
         speedBurstUI.SetActive(true);
         speedBurstUI.GetComponent<SpeedBurstUI>().UpdateCircle(burstCoolDownLength);
-        yield return StartCoroutine(burstCoolDown());
+        yield return StartCoroutine(BurstCoolDown());
         speedBurstUI.SetActive(false);
         burstActive = false;
     }
 
-    IEnumerator burstWait()
+    IEnumerator BurstWait()
     {
         yield return new WaitForSeconds(burstLength);
     }
 
-    IEnumerator burstCoolDown()
+    IEnumerator BurstCoolDown()
     {
         yield return new WaitForSeconds(burstCoolDownLength);
+    }
+
+    private float CalculateInputAxis(bool positiveValue, bool negativeValue, float axisValue)
+    {
+        if(positiveValue)
+        {
+            if(axisValue <= 1)
+            {
+                axisValue += axisCalibration;
+            }
+        }
+
+        if(negativeValue)
+        {
+            if(axisValue >= -1)
+            {
+                axisValue -= axisCalibration;
+            }
+        }
+
+        if(!positiveValue && axisValue > 0)
+        {
+            axisValue -= axisCalibration;
+        }
+
+        if(!negativeValue && axisValue < 0)
+        {
+            axisValue += axisCalibration;
+        }
+
+        if(axisValue < axisCalibration && axisValue > -axisCalibration)
+        {
+            axisValue = 0;
+        }
+
+        return axisValue;
     }
     
 }

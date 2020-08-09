@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class CombatController : MonoBehaviour
 {
-    [SerializeField] KeyCode mainWeaponKey;
-    [SerializeField] KeyCode leftWeaponKey;
-    [SerializeField] KeyCode rightWeaponKey;
+    [SerializeField] public KeyCode mainWeaponKey;
+    [SerializeField] public KeyCode leftWeaponKey;
+    [SerializeField] public KeyCode rightWeaponKey;
     [SerializeField] TurretSlot mainTurret;
     TurretSlot[] turretSlots;
 

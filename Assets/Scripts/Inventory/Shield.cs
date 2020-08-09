@@ -13,6 +13,7 @@ public class Shield : MonoBehaviour
     public bool shieldDown;
     CapsuleCollider shieldCollider;
     MeshRenderer meshRenderer;
+    public GameObject shieldHost;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +73,11 @@ public class Shield : MonoBehaviour
     public bool IsShieldEnabled()
     {
         return shieldDown;
+    }
+
+    public void SetShieldHost(GameObject host)
+    {
+        shieldHost = host;
     }
 
 }

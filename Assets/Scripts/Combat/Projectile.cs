@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
     Shield shieldOfImpact = null;
     [SerializeField] float damage = 0;
     [SerializeField] string origin;
+    [SerializeField] string originTeam;
     SphereCollider sphereCollider;
     MeshRenderer meshRenderer;
     float maxLifeTime;
@@ -41,9 +42,10 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, maxLifeTime);
     }
 
-    public void SetOrigin(string name)
+    public void SetOrigin(string name, string team)
     {
         origin = name;
+        originTeam = team;
     }
 
     // public void SetTarget(Health target, GameObject instigator, float damage)
@@ -67,43 +69,56 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Shield>() && origin != "Player")
+        //Check for shield impact
+        if (other.GetComponent<Shield>())
         {
             shieldOfImpact = other.gameObject.GetComponent<Shield>();
-            shieldOfImpact.TakeDamage(damage);
+            //Check if shield is on the origin gameObject
+            if(shieldOfImpact.shieldHost.name != origin)
+            {
+                //Check if the shield is on the same team
+                if(shieldOfImpact.tag != originTeam)
+                {
+                    shieldOfImpact.TakeDamage(damage);
+                    //Destroy Projectile
+                    HitEffect();
+                    DestroyProjectile();
+                }
+                return;
+            }
+        }
+
+        //Check if hit the Terrain
+        if (other.name == "Terrain")
+        {
             HitEffect();
             DestroyProjectile();
             return;
         }
 
-        if (other.GetComponent<Health>() && origin != other.name)
+        //Check for health impact
+        if (other.GetComponent<Health>())
         {
             target = other.gameObject.GetComponent<Health>();
-        }
-        else if (other.name == "Terrain")
-        {
-            HitEffect();
-            DestroyProjectile();
-            return;
-        }
-        else
-        {
-            return;
-        }
+            if (target.IsDead()) return;
+            //check if health is on the origin opbject
+            if(origin != other.name)
+            {
+                //check if health is on the same team.
+                if(target.tag != originTeam)
+                {
+                    target.GetComponent<Health>().TakeDamage(damage);
+                }
+                print("origin: " + origin + " other: " + other.name);
+                HitEffect();
+                DestroyProjectile();
+                        speed = 0;
+                //TODO onhit?
+                // onHit.Invoke();
+            }
 
-        if (target.IsDead()) return;
-        
-        if(origin != other.name)
-        {
-            target.GetComponent<Health>().TakeDamage(damage);
         }
-
-        speed = 0;
-
-        //TODO onhit?
-        onHit.Invoke();
-        HitEffect();
-        DestroyProjectile();
+        return;
     }
 
     private void DestroyProjectile()

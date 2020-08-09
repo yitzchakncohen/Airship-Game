@@ -22,11 +22,8 @@ public class ShieldSlot : MonoBehaviour
 
     private void ShieldOnStart()
     {
-        if(itemInSlot == null) return;
-        shield = itemInSlot.GetShield();
-        GameObject localShield = Instantiate(shield, this.transform.position, this.transform.rotation, this.transform);
-        localShield.name = equipLocation.ToString();
-        localShield.transform.eulerAngles = startingRotation;
+        if (itemInSlot == null) return;
+        SpawnShield();
         equipment.AddItem(equipLocation, itemInSlot);
     }
 
@@ -37,10 +34,7 @@ public class ShieldSlot : MonoBehaviour
         itemInSlot = equipment.GetItemInSlot(equipLocation) as ShieldItem;
         if(itemInSlot != null)
         {
-            shield = itemInSlot.GetShield();
-            GameObject localShield = Instantiate(shield, this.transform.position, this.transform.rotation, this.transform);
-            localShield.name = equipLocation.ToString();
-            localShield.transform.eulerAngles = startingRotation;
+            SpawnShield();
         }
     }
 
@@ -51,5 +45,14 @@ public class ShieldSlot : MonoBehaviour
         {
             Destroy(oldShield.gameObject);
         }
+    }
+
+    private void SpawnShield()
+    {
+        shield = itemInSlot.GetShield();
+        GameObject localShield = Instantiate(shield, this.transform.position, this.transform.rotation, this.transform);
+        localShield.name = equipLocation.ToString();
+        localShield.transform.eulerAngles = startingRotation;
+        localShield.tag = this.tag;
     }
 }

@@ -42,6 +42,7 @@ public class TurretSlot : MonoBehaviour
             turret = itemInTurret.GetTurret();
             GameObject localTurret = Instantiate(turret, this.transform.position, this.transform.rotation, this.transform);
             localTurret.name = equipLocation.ToString();
+            localTurret.tag = this.tag;
             // print("Create " + localTurret.name);
         }
     }
