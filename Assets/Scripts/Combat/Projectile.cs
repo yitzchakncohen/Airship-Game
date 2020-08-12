@@ -1,143 +1,147 @@
-﻿using UnityEngine;
+﻿using AirShip.Iventory;
+using UnityEngine;
 using UnityEngine.Events;
-public class Projectile : MonoBehaviour
+
+namespace AirShip.Combat
 {
-
-    [SerializeField] float speed = 1;
-    // [SerializeField] bool isHoming = false;
-    [SerializeField] GameObject hitEffect = null;
-    [SerializeField] GameObject[] destroyOnHit = null;
-    [SerializeField] float lifeAfterImpact = 10f;
-    [SerializeField] UnityEvent onHit;
-    Health target = null;
-    Shield shieldOfImpact = null;
-    [SerializeField] float damage = 0;
-    [SerializeField] string origin;
-    [SerializeField] string originTeam;
-    SphereCollider sphereCollider;
-    MeshRenderer meshRenderer;
-    float maxLifeTime;
-
-    private void Start()
+    public class Projectile : MonoBehaviour
     {
-        // transform.LookAt(GetAimLocation());
-        meshRenderer = GetComponent<MeshRenderer>();
-        sphereCollider = GetComponent<SphereCollider>();
-    }
 
-    void Update()
-    {
-        // if (target == null) return;
+        [SerializeField] float speed = 1;
+        // [SerializeField] bool isHoming = false;
+        [SerializeField] GameObject hitEffect = null;
+        [SerializeField] GameObject[] destroyOnHit = null;
+        [SerializeField] float lifeAfterImpact = 10f;
+        [SerializeField] UnityEvent onHit;
+        Health target = null;
+        Shield shieldOfImpact = null;
+        [SerializeField] float damage = 0;
+        [SerializeField] string origin;
+        [SerializeField] string originTeam;
+        SphereCollider sphereCollider;
+        MeshRenderer meshRenderer;
+        float maxLifeTime;
 
-        // if (isHoming && !target.IsDead())
-        // {
-        //     transform.LookAt(GetAimLocation());
-        // }
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
-
-    public void SetRange(float range)
-    {
-        maxLifeTime = range / speed;
-        Destroy(gameObject, maxLifeTime);
-    }
-
-    public void SetOrigin(string name, string team)
-    {
-        origin = name;
-        originTeam = team;
-    }
-
-    // public void SetTarget(Health target, GameObject instigator, float damage)
-    // {
-    //     this.target = target;
-    //     this.damage = damage;
-
-    //     Destroy(gameObject, maxLifeTime);
-    // }
-
-    private Vector3 GetAimLocation()
-    {
-        // CapsuleCollider targetCapsule = target.GetComponent<CapsuleCollider>();
-        // if (targetCapsule == null)
-        // {
-        //     return target.transform.position;
-        // }
-        // return target.transform.position + Vector3.up * targetCapsule.height / 2;
-        return Vector3.forward;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //Check for shield impact
-        if (other.GetComponent<Shield>())
+        private void Start()
         {
-            shieldOfImpact = other.gameObject.GetComponent<Shield>();
-            //Check if shield is on the origin gameObject
-            if(shieldOfImpact.shieldHost.name != origin)
-            {
-                //Check if the shield is on the same team
-                if(shieldOfImpact.tag != originTeam)
-                {
-                    shieldOfImpact.TakeDamage(damage);
-                    //Destroy Projectile
-                    HitEffect();
-                    DestroyProjectile();
-                }
-                return;
-            }
+            // transform.LookAt(GetAimLocation());
+            meshRenderer = GetComponent<MeshRenderer>();
+            sphereCollider = GetComponent<SphereCollider>();
         }
 
-        //Check if hit the Terrain
-        if (other.name == "Terrain")
+        void Update()
         {
-            HitEffect();
-            DestroyProjectile();
+            // if (target == null) return;
+
+            // if (isHoming && !target.IsDead())
+            // {
+            //     transform.LookAt(GetAimLocation());
+            // }
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+
+        public void SetRange(float range)
+        {
+            maxLifeTime = range / speed;
+            Destroy(gameObject, maxLifeTime);
+        }
+
+        public void SetOrigin(string name, string team)
+        {
+            origin = name;
+            originTeam = team;
+        }
+
+        // public void SetTarget(Health target, GameObject instigator, float damage)
+        // {
+        //     this.target = target;
+        //     this.damage = damage;
+
+        //     Destroy(gameObject, maxLifeTime);
+        // }
+
+        private Vector3 GetAimLocation()
+        {
+            // CapsuleCollider targetCapsule = target.GetComponent<CapsuleCollider>();
+            // if (targetCapsule == null)
+            // {
+            //     return target.transform.position;
+            // }
+            // return target.transform.position + Vector3.up * targetCapsule.height / 2;
+            return Vector3.forward;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            //Check for shield impact
+            if (other.GetComponent<Shield>())
+            {
+                shieldOfImpact = other.gameObject.GetComponent<Shield>();
+                //Check if shield is on the origin gameObject
+                if(shieldOfImpact.shieldHost.name != origin)
+                {
+                    //Check if the shield is on the same team
+                    if(shieldOfImpact.tag != originTeam)
+                    {
+                        shieldOfImpact.TakeDamage(damage);
+                        //Destroy Projectile
+                        HitEffect();
+                        DestroyProjectile();
+                    }
+                    return;
+                }
+            }
+
+            //Check if hit the Terrain
+            if (other.name == "Terrain")
+            {
+                HitEffect();
+                DestroyProjectile();
+                return;
+            }
+
+            //Check for health impact
+            if (other.GetComponent<Health>())
+            {
+                target = other.gameObject.GetComponent<Health>();
+                if (target.IsDead()) return;
+                //check if health is on the origin opbject
+                if(origin != other.name)
+                {
+                    //check if health is on the same team.
+                    if(target.tag != originTeam)
+                    {
+                        target.GetComponent<Health>().TakeDamage(damage);
+                    }
+                    HitEffect();
+                    DestroyProjectile();
+                            speed = 0;
+                    //TODO onhit?
+                    // onHit.Invoke();
+                }
+
+            }
             return;
         }
 
-        //Check for health impact
-        if (other.GetComponent<Health>())
+        private void DestroyProjectile()
         {
-            target = other.gameObject.GetComponent<Health>();
-            if (target.IsDead()) return;
-            //check if health is on the origin opbject
-            if(origin != other.name)
+            foreach (GameObject toDestroy in destroyOnHit)
             {
-                //check if health is on the same team.
-                if(target.tag != originTeam)
-                {
-                    target.GetComponent<Health>().TakeDamage(damage);
-                }
-                print("origin: " + origin + " other: " + other.name);
-                HitEffect();
-                DestroyProjectile();
-                        speed = 0;
-                //TODO onhit?
-                // onHit.Invoke();
+                Destroy(toDestroy);
             }
-
+            meshRenderer.enabled = false;
+            sphereCollider.enabled = false;
+            Destroy(gameObject, lifeAfterImpact);
         }
-        return;
-    }
 
-    private void DestroyProjectile()
-    {
-        foreach (GameObject toDestroy in destroyOnHit)
+        private void HitEffect()
         {
-            Destroy(toDestroy);
-        }
-        meshRenderer.enabled = false;
-        sphereCollider.enabled = false;
-        Destroy(gameObject, lifeAfterImpact);
-    }
-
-    private void HitEffect()
-    {
-        if (hitEffect != null)
-        {
-            GameObject hitEffectObject = Instantiate<GameObject>(hitEffect, gameObject.transform.position, transform.rotation);
-            Destroy(hitEffectObject, lifeAfterImpact);
+            if (hitEffect != null)
+            {
+                GameObject hitEffectObject = Instantiate<GameObject>(hitEffect, gameObject.transform.position, transform.rotation);
+                Destroy(hitEffectObject, lifeAfterImpact);
+            }
         }
     }
 }

@@ -2,40 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using AirShip.Control;
 
-public class SpeedBurstUI : MonoBehaviour
+namespace AirShip.UI
 {
-    [SerializeField] GameObject overlay;
-    Image circle;
-    float timer;
-    float endTime;
-
-    void Awake()
+    public class SpeedBurstUI : MonoBehaviour
     {
-        circle = overlay.GetComponent<Image>();
-    }
+        [SerializeField] GameObject overlay;
+        MovementController movementController;
+        Image circle;
+        float timer;
+        float endTime;
 
-    void OnEnable()
-    {
-        circle.fillAmount = 0;
-        timer = 0f;
-    }
+        void Awake()
+        {
+            circle = overlay.GetComponent<Image>();
+            movementController = GameObject.FindObjectOfType<MovementController>();
+        }
 
-    private void Update() 
-    {
-        timer += Time.deltaTime;
-        circle.fillAmount = timer / endTime ;
-    }
+        void OnEnable()
+        {
+            circle.fillAmount = 0;
+            timer = 0f;
+            UpdateCircle();
+        }
+
+        private void Update() 
+        {
+            timer += Time.deltaTime;
+            circle.fillAmount = timer / endTime ;
+        }
 
         void LateUpdate()
-    {
-        transform.forward = Camera.main.transform.forward;
-    }
+        {
+            transform.forward = Camera.main.transform.forward;
+        }
 
-    public void UpdateCircle(float endTimeAmount) 
-    {
-        endTime = endTimeAmount;
+        public void UpdateCircle() 
+        {
+            endTime = movementController.GetBurthCoolDown();
+        }
     }
-
 
 }

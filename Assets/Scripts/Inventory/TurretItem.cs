@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using GameDevTV.Inventories;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Turret Item"))]
-public class TurretItem : EquipableItem
+namespace AirShip.Iventory
 {
-    [SerializeField] GameObject turret;
-
-    public GameObject GetTurret()
+    [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Turret Item"))]
+    public class TurretItem : EquipableItem
     {
-        return turret;
+        [SerializeField] GameObject turret;
+
+        public GameObject GetTurret()
+        {
+            return turret;
+        }
     }
 }

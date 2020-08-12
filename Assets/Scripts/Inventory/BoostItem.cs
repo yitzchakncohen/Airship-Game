@@ -3,38 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Inventories;
 
-[CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Boost Item"))]
-
-public class BoostItem : EquipableItem
+namespace AirShip.Iventory
 {
-    [SerializeField] GameObject boost;
-    [SerializeField] GameObject boostFX;
-    [SerializeField] float speedBurstMultiplier;
-    [SerializeField] float burstLength;
-    [SerializeField] float burstCoolDown;
-    // Start is called before the first frame update
-    public float GetBurst()
-    {
-        return speedBurstMultiplier;
-    }
+    [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Boost Item"))]
 
-    public float GetBurstLength()
+    public class BoostItem : EquipableItem
     {
-        return burstLength;
-    }
+        [SerializeField] GameObject boost;
+        [SerializeField] GameObject boostFX;
+        [SerializeField] float speedBurstMultiplier;
+        [SerializeField] float burstLength;
+        [SerializeField] float burstCoolDown;
+        // Start is called before the first frame update
+        public float GetBurst()
+        {
+            return speedBurstMultiplier;
+        }
 
-    public GameObject GetBoostObject()
-    {
-        return boost;
-    }
+        public float GetBurstLength()
+        {
+            return burstLength;
+        }
 
-    public float GetBurstCoolDown()
-    {
-        return burstCoolDown;
-    }
+        public GameObject GetBoostObject()
+        {
+            return boost;
+        }
 
-    public GameObject GetBurstFX()
-    {
-        return boostFX;
+        public float GetBurstCoolDown()
+        {
+            return burstCoolDown;
+        }
+
+        public GameObject GetBurstFX()
+        {
+            return boostFX;
+        }
     }
 }

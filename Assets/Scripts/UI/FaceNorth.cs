@@ -1,16 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AirShip.Control;
 
-public class FaceNorth : MonoBehaviour
+namespace AirShip.UI
 {
-    void Update()
+    public class FaceNorth : MonoBehaviour
     {
-        //transform.rotation = Quaternion.Euler(0,0,0);
-    }
+        MovementController movementController;
 
-    public void ApplyRotation(float rotation)
-    {
-        transform.rotation = Quaternion.Euler(0,0,rotation);
+        void Start()
+        {
+            movementController = GameObject.FindObjectOfType<MovementController>();
+        }
+        void Update()
+        {
+            ApplyRotation();
+        }
+
+        public void ApplyRotation()
+        {
+            transform.rotation = Quaternion.Euler(0,0,movementController.GetCompassRotation());
+        }
     }
 }

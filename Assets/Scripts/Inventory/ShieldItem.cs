@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using GameDevTV.Inventories;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Shield Item"))]
-
-public class ShieldItem : EquipableItem
+namespace AirShip.Iventory
 {
-    [SerializeField] GameObject shield;
-    
-    // Start is called before the first frame update
-    public GameObject GetShield()
+    [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Shield Item"))]
+
+    public class ShieldItem : EquipableItem
     {
-        return shield;
+        [SerializeField] GameObject shield;
+        
+        // Start is called before the first frame update
+        public GameObject GetShield()
+        {
+            return shield;
+        }
     }
 }

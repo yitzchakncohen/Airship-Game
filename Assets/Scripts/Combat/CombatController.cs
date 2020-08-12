@@ -1,84 +1,88 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AirShip.Iventory;
 using UnityEngine;
 
-public class CombatController : MonoBehaviour
+namespace AirShip.Combat
 {
-    [SerializeField] public KeyCode mainWeaponKey;
-    [SerializeField] public KeyCode leftWeaponKey;
-    [SerializeField] public KeyCode rightWeaponKey;
-    [SerializeField] TurretSlot mainTurret;
-    TurretSlot[] turretSlots;
-
-    // Start is called before the first frame update
-    void Start()
+    public class CombatController : MonoBehaviour
     {
-        GetTurrets();
-    }
+        [SerializeField] public KeyCode mainWeaponKey;
+        [SerializeField] public KeyCode leftWeaponKey;
+        [SerializeField] public KeyCode rightWeaponKey;
+        [SerializeField] TurretSlot mainTurret;
+        TurretSlot[] turretSlots;
 
-    private void GetTurrets()
-    {
-        turretSlots = FindObjectsOfType<TurretSlot>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(mainWeaponKey))
+        // Start is called before the first frame update
+        void Start()
         {
-            FireMainWeapon();
+            GetTurrets();
         }
-        if(Input.GetKeyDown(rightWeaponKey))
-        {
-            FireRightWeapon();
-        }
-        if(Input.GetKeyDown(leftWeaponKey))
-        {
-            FireLeftWeapon();
-        }
-    }
 
-    private void FireMainWeapon()
-    {
-        foreach (TurretSlot slot in turretSlots)
+        private void GetTurrets()
         {
-            if(slot.GetLocation() == TurretLocations.Main)
+            turretSlots = FindObjectsOfType<TurretSlot>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if(Input.GetKeyDown(mainWeaponKey))
             {
-                Turret turret = slot.GetComponentInChildren<Turret>();
-                if(turret != null)
+                FireMainWeapon();
+            }
+            if(Input.GetKeyDown(rightWeaponKey))
+            {
+                FireRightWeapon();
+            }
+            if(Input.GetKeyDown(leftWeaponKey))
+            {
+                FireLeftWeapon();
+            }
+        }
+
+        private void FireMainWeapon()
+        {
+            foreach (TurretSlot slot in turretSlots)
+            {
+                if(slot.GetLocation() == TurretLocations.Main)
                 {
-                    turret.Fire();
+                    Turret turret = slot.GetComponentInChildren<Turret>();
+                    if(turret != null)
+                    {
+                        turret.Fire();
+                    }
                 }
             }
         }
-    }
 
-    private void FireRightWeapon()
-    {
-        foreach (TurretSlot slot in turretSlots)
+        private void FireRightWeapon()
         {
-            if(slot.GetLocation() == TurretLocations.Right)
+            foreach (TurretSlot slot in turretSlots)
             {
-                Turret turret = slot.GetComponentInChildren<Turret>();
-                if(turret != null)
+                if(slot.GetLocation() == TurretLocations.Right)
                 {
-                    turret.Fire();
+                    Turret turret = slot.GetComponentInChildren<Turret>();
+                    if(turret != null)
+                    {
+                        turret.Fire();
+                    }
                 }
             }
         }
-    }
-    
-    private void FireLeftWeapon()
-    {
-        foreach (TurretSlot slot in turretSlots)
+        
+        private void FireLeftWeapon()
         {
-            if(slot.GetLocation() == TurretLocations.Left)
+            foreach (TurretSlot slot in turretSlots)
             {
-                Turret turret = slot.GetComponentInChildren<Turret>();
-                if(turret != null)
+                if(slot.GetLocation() == TurretLocations.Left)
                 {
-                    turret.Fire();
+                    Turret turret = slot.GetComponentInChildren<Turret>();
+                    if(turret != null)
+                    {
+                        turret.Fire();
+                    }
                 }
             }
         }
