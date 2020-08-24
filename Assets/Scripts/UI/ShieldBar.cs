@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using AirShip.Iventory;
+﻿using AirShip.Inventory;
 using UnityEngine;
 using UnityEngine.UI;
 

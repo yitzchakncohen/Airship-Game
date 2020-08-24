@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AirShip.Iventory
+namespace AirShip.Inventory
 {
     public class Armour : MonoBehaviour
     {

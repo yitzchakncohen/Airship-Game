@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using GameDevTV.Inventories;
+﻿using GameDevTV.Inventories;
 using UnityEngine;
 
-namespace AirShip.Iventory
+namespace AirShip.Inventory
 {
     [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Shield Item"))]
 

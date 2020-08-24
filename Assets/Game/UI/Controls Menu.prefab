@@ -276,7 +276,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 426309863203545745}
@@ -406,7 +406,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 480188308067891251}
@@ -539,7 +539,6 @@ MonoBehaviour:
   leftFire: {fileID: 1334251940156936875}
   rightFire: {fileID: 2806647974773096061}
   speedBurst: {fileID: 3254835797729065609}
-  controlsCanvas: {fileID: 6550811765969621861}
   normalColour:
     serializedVersion: 2
     rgba: 4294967295
@@ -913,7 +912,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2050100859897896234}
@@ -1199,7 +1198,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2685828521811992628}
@@ -1395,7 +1394,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2761718346184068850}
@@ -1993,7 +1992,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 3206590569434569777}
@@ -2123,7 +2122,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 3780033169412810953}
@@ -3450,7 +3449,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 5322283325399944030}
@@ -4270,7 +4269,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 6261752814895728886}
@@ -4946,7 +4945,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: setKeysToDefauSlt
+        m_MethodName: SetKeysToDefault
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5610,7 +5609,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6337787400868011034}
-        m_MethodName: changeKey
+        m_MethodName: ChangeKey
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8480991073590323571}

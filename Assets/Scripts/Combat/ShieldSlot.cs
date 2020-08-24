@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using AirShip.Iventory;
+﻿using AirShip.Inventory;
 using GameDevTV.Inventories;
 using UnityEngine;
 

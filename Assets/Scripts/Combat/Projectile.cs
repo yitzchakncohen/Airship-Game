@@ -1,4 +1,4 @@
-﻿using AirShip.Iventory;
+﻿using AirShip.Inventory;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -24,7 +24,7 @@ namespace AirShip.Combat
 
         private void Start()
         {
-            // transform.LookAt(GetAimLocation());
+            // transform.LookAt(GetAimLocation()); //add back in when I want homing misiles
             meshRenderer = GetComponent<MeshRenderer>();
             sphereCollider = GetComponent<SphereCollider>();
         }

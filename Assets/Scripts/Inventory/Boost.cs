@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace AirShip.Iventory
+namespace AirShip.Inventory
 {
     public class Boost : MonoBehaviour
     {

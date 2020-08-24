@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using AirShip.Iventory;
+﻿using AirShip.Inventory;
 using UnityEngine;
 
 namespace AirShip.Combat
 {
     public class CombatController : MonoBehaviour
     {
-        [SerializeField] public KeyCode mainWeaponKey;
-        [SerializeField] public KeyCode leftWeaponKey;
-        [SerializeField] public KeyCode rightWeaponKey;
-        [SerializeField] TurretSlot mainTurret;
+        ControlsKeyMapping controls;
         TurretSlot[] turretSlots;
 
         // Start is called before the first frame update
         void Start()
         {
+            //Find Turret slots
             GetTurrets();
+            //Get controls component
+            controls = GameObject.FindObjectOfType<ControlsKeyMapping>();
         }
 
         private void GetTurrets()
@@ -28,15 +25,16 @@ namespace AirShip.Combat
         // Update is called once per frame
         void Update()
         {
-            if(Input.GetKeyDown(mainWeaponKey))
+            //Weapons input
+            if(Input.GetKeyDown(controls.GetKeyCode("Fire Main")))
             {
                 FireMainWeapon();
             }
-            if(Input.GetKeyDown(rightWeaponKey))
+            if(Input.GetKeyDown(controls.GetKeyCode("Fire Right")))
             {
                 FireRightWeapon();
             }
-            if(Input.GetKeyDown(leftWeaponKey))
+            if(Input.GetKeyDown(controls.GetKeyCode("Fire Left")))
             {
                 FireLeftWeapon();
             }
@@ -44,6 +42,7 @@ namespace AirShip.Combat
 
         private void FireMainWeapon()
         {
+            //Check tags for which weapons to fire as "Main Weapons"
             foreach (TurretSlot slot in turretSlots)
             {
                 if(slot.GetLocation() == TurretLocations.Main)
@@ -59,6 +58,7 @@ namespace AirShip.Combat
 
         private void FireRightWeapon()
         {
+            //Check tags for which weapons to fire as "Right Weapons"
             foreach (TurretSlot slot in turretSlots)
             {
                 if(slot.GetLocation() == TurretLocations.Right)
@@ -74,6 +74,7 @@ namespace AirShip.Combat
         
         private void FireLeftWeapon()
         {
+            //Check tags for which weapons to fire as "Left Weapons"
             foreach (TurretSlot slot in turretSlots)
             {
                 if(slot.GetLocation() == TurretLocations.Left)

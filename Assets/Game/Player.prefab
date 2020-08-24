@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 8860232544721535679}
   - component: {fileID: 2621852529649972243}
   - component: {fileID: 3202546462231025333}
+  - component: {fileID: 827305203508969399}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -130,13 +131,6 @@ MonoBehaviour:
   defaultBurstEffect: {fileID: 1721701065852284712, guid: 11b915f6341130a47a37d57d0de6d155,
     type: 3}
   controllerEnabled: 1
-  forwardPositive: 119
-  forwardNegative: 115
-  rotatePositive: 100
-  rotateNegative: 97
-  verticalPositive: 273
-  verticalNegative: 274
-  speedBurstKey: 304
   speedBurstUI: {fileID: 6215923280428206867}
 --- !u!114 &5179970764469175433
 MonoBehaviour:
@@ -150,10 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2579b48b29e08c43b6e6cf55136cf38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainWeaponKey: 32
-  leftWeaponKey: 276
-  rightWeaponKey: 275
-  mainTurret: {fileID: 3419586982306414712}
 --- !u!136 &3964976776059542404
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -205,10 +195,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b915b96c166d6cb4eb6bd43782079a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 10000
   healthPoints: 10000
+  baseMaxHealthPoints: 1000
   timeBeforeDestroy: 1
   deathFX: {fileID: 8472508632707675748, guid: 024200a784789584e986594c74c538a4, type: 3}
+--- !u!114 &827305203508969399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480746601435018314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab59616b8b52064c92c84fede18ea43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultForwardPositive: 119
+  defaultForwardNegative: 115
+  defaultRotatePositive: 100
+  defaultRotateNegative: 97
+  defaultVerticalPositive: 273
+  defaultVerticalNegative: 274
+  defaultSpeedBurstKey: 304
+  defaultMainWeaponKey: 32
+  defaultLeftWeaponKey: 276
+  defaultRightWeaponKey: 275
 --- !u!1001 &932686194792896012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -972,18 +984,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a80a86adb172799418dd089aab351258, type: 3}
---- !u!114 &3419586982306414712 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5191080194651491271, guid: a80a86adb172799418dd089aab351258,
-    type: 3}
-  m_PrefabInstance: {fileID: 7457604538827541439}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4e0add02540394a93336707cab9f03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7534255019199388246
 PrefabInstance:
   m_ObjectHideFlags: 0

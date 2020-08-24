@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GameDevTV.Inventories;
 using UnityEngine;
 
-namespace AirShip.Iventory
+namespace AirShip.Inventory
 {
     [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Turret Item"))]
     public class TurretItem : EquipableItem

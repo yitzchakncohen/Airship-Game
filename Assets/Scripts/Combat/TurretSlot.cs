@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using GameDevTV.Inventories;
-using System;
-using AirShip.Iventory;
+using AirShip.Inventory;
 
 namespace AirShip.Combat
 {
     public class TurretSlot : MonoBehaviour
     {
-        [SerializeField] TurretSize turretSize;
+        [SerializeField] TurretSize turretSize; //TODO Check why TurretSize is here.
         [SerializeField] TurretItem itemInTurret;
         [SerializeField] TurretLocations turretLocation;
         [SerializeField] EquipLocation equipLocation;

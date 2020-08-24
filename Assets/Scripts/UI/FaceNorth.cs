@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using AirShip.Control;
 
 namespace AirShip.UI
 {
+    //This class just makes the compass arrow always point north in the UI.
     public class FaceNorth : MonoBehaviour
     {
         MovementController movementController;

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using GameDevTV.Inventories;
-using AirShip.Iventory;
+using AirShip.Inventory;
 
 namespace AirShip.Control
 {
@@ -29,13 +27,7 @@ namespace AirShip.Control
         // [SerializeField] Animator animator;
 
         [SerializeField] public bool controllerEnabled = true;
-        [SerializeField] public KeyCode forwardPositive;
-        [SerializeField] public KeyCode forwardNegative;
-        [SerializeField] public KeyCode rotatePositive;
-        [SerializeField] public KeyCode rotateNegative;
-        [SerializeField] public KeyCode verticalPositive;
-        [SerializeField] public KeyCode verticalNegative;
-        [SerializeField] public KeyCode speedBurstKey;
+        ControlsKeyMapping controls;
         [SerializeField] GameObject speedBurstUI;
         
         Equipment equipment;
@@ -50,11 +42,17 @@ namespace AirShip.Control
 
         void Start()
         {
+            //Get controls component
+            controls = GameObject.FindObjectOfType<ControlsKeyMapping>();
+            //Set rigidBody componenet
             rigidBody = GetComponent<Rigidbody>();
-            burstEffectObject.SetActive(false);
-            speedBurstUI.SetActive(false);
+            //Connect equipment to speed burst.
             equipment = GetComponent<Equipment>();
             equipment.equipmentUpdated += speedBurstUpdate;
+            
+            //Speed burst setup
+            burstEffectObject.SetActive(false);
+            speedBurstUI.SetActive(false);
             GameObject speedBurstEffect = Instantiate(defaultBurstEffect, burstEffectObject.transform);
             speedBurstEffect.name = burstFXName; 
         }
@@ -62,15 +60,11 @@ namespace AirShip.Control
         void Update()
         {
             // Control Inputs
-            // inputs = Vector3.zero;
-            // inputs.x = Input.GetAxis("Horizontal");
-            // inputs.z = Input.GetAxis("Vertical");
-            // inputs.y = Input.GetAxis("Height");
-            inputs.x = CalculateInputAxis(Input.GetKey(rotatePositive), Input.GetKey(rotateNegative), inputs.x);
-            inputs.z = CalculateInputAxis(Input.GetKey(forwardPositive), Input.GetKey(forwardNegative), inputs.z);
-            inputs.y = CalculateInputAxis(Input.GetKey(verticalPositive), Input.GetKey(verticalNegative), inputs.y); 
+            inputs.x = CalculateInputAxis(Input.GetKey(controls.GetKeyCode("Rotate Right")), Input.GetKey(controls.GetKeyCode("Rotate Left")), inputs.x);
+            inputs.z = CalculateInputAxis(Input.GetKey(controls.GetKeyCode("Forward")), Input.GetKey(controls.GetKeyCode("Reverse")), inputs.z);
+            inputs.y = CalculateInputAxis(Input.GetKey(controls.GetKeyCode("Up")), Input.GetKey(controls.GetKeyCode("Down")), inputs.y); 
             
-            if(Input.GetKeyDown(speedBurstKey) && !burstActive)
+            if(Input.GetKeyDown(controls.GetKeyCode("Speed Burst")) && !burstActive)
             {
                 StartCoroutine(SpeedBurst());
             }
@@ -86,7 +80,6 @@ namespace AirShip.Control
             float rotationAmount = inputs.x * rotationSpeed * Time.fixedDeltaTime;
 
             //Make ship planar, using freeze rotation right now
-            // rigidBody.MoveRotation(Quaternion.Euler(0, transform.eulerAngles.y, 0));
             if (controllerEnabled && inputs != new Vector3(0,0,0))
             {
                 //If controller is enabled, move player with MovePosition or Velocity or addForce? TODO

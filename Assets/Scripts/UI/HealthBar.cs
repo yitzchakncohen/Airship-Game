@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using AirShip.Combat;
+﻿using AirShip.Combat;
 using UnityEngine;
 using UnityEngine.UI;
 

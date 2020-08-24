@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using AirShip.Combat;
+﻿using AirShip.Combat;
 using UnityEngine;
 
-namespace AirShip.Iventory
+namespace AirShip.Inventory
 {
     public class Turret : MonoBehaviour
     {
         [SerializeField] GameObject projectile;
-        [SerializeField] float range;
+        public float range;
         [SerializeField] TurretSize turretSize;
         public Health turretParent;
 

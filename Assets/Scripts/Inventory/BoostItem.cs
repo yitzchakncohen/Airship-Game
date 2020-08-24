@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using GameDevTV.Inventories;
 
-namespace AirShip.Iventory
+namespace AirShip.Inventory
 {
     [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Boost Item"))]
 

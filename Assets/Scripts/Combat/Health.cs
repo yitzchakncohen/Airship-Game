@@ -1,44 +1,49 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using GameDevTV.Inventories;
-using AirShip.Iventory;
+using AirShip.Inventory;
 
 namespace AirShip.Combat
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] float maxHealthPoints = 100;
-        [SerializeField] private float healthPoints;
+        //Health points Serialized for game testing. 
+        [SerializeField] float healthPoints;
+        [SerializeField] float baseMaxHealthPoints = 100f; 
         [SerializeField] float timeBeforeDestroy = 1f;
         [SerializeField] GameObject deathFX;
         Equipment equipment;
         Shield[] shields;
-        bool dead = false;
-        float defaultMaxHealthPoints;
+
         float lastArmourValue;
-        // Start is called before the first frame update
+        float maxHealthPoints;  
+
         void Start()
         {
+            //Set up health points
+            maxHealthPoints = baseMaxHealthPoints;
             healthPoints = maxHealthPoints;
-            defaultMaxHealthPoints = maxHealthPoints;
+
+            //Check equipment for health upgrades
             equipment = GetComponent<Equipment>();
             if(equipment)
             {
-                // print("Equipment Found");
-                equipment.equipmentUpdated += checkArmour; 
+                // Subscribe to equipment update and check for new shields and armour.
+                CheckArmour();
+                equipment.equipmentUpdated += CheckArmour; 
+                equipment.equipmentUpdated += CheckShield; 
             }
+
+            // Check for shields even if there is no equipment.
+            CheckShield();
         }
 
-        // Update is called once per frame
         void Update()
         {
+            // Check health
             if(healthPoints < 0)
             {
                 DestroyTarget();
-            }
-            checkShield();     
+            }    
         }
 
         public void TakeDamage(float damage)
@@ -48,7 +53,11 @@ namespace AirShip.Combat
 
         public bool IsDead()
         {
-            return dead;
+            if(healthPoints < 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public float GetHealth()
@@ -64,30 +73,32 @@ namespace AirShip.Combat
         private void DestroyTarget()
         {
             GameObject deathFXObject = Instantiate(deathFX, transform.position, transform.rotation);
-            dead = true;
             Destroy(deathFXObject, timeBeforeDestroy + 1f);
             Destroy(gameObject, timeBeforeDestroy);
         }
 
-        private void checkArmour()
+        private void CheckArmour()
         {
             ArmourItem armourItem = equipment.GetItemInSlot(EquipLocation.Armour) as ArmourItem;
             if(armourItem)
             {
-                maxHealthPoints = defaultMaxHealthPoints +armourItem.GetArmourAmount();
+                //Add armour health to player health.
+                maxHealthPoints = baseMaxHealthPoints + armourItem.GetArmourAmount();
                 healthPoints = healthPoints + armourItem.GetArmourAmount();
                 lastArmourValue = armourItem.GetArmourAmount();
             }
             if(!armourItem)
             {
+                //If armour was removed, remove health bonus.
                 healthPoints = healthPoints - lastArmourValue;
-                maxHealthPoints = defaultMaxHealthPoints;
+                maxHealthPoints = baseMaxHealthPoints;
                 lastArmourValue = 0f;
             }
         }
 
-        private void checkShield()
+        private void CheckShield()
         {
+            //Check for a shielf and set the Health gameObject the shield is a child of.
             shields = this.GetComponentsInChildren<Shield>();
             foreach (Shield shield in shields)
             {
