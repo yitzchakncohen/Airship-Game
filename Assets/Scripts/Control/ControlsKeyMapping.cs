@@ -18,55 +18,55 @@ public class ControlsKeyMapping : MonoBehaviour
     [SerializeField] public KeyCode defaultMainWeaponKey;
     [SerializeField] public KeyCode defaultLeftWeaponKey;
     [SerializeField] public KeyCode defaultRightWeaponKey;
-    private Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
+    private Dictionary<Controls, KeyCode> keys = new Dictionary<Controls, KeyCode>();
     // Start is called before the first frame update
     void Awake()
     {
-        keys.Add("Forward", defaultForwardPositive);
-        keys.Add("Reverse", defaultForwardNegative);
-        keys.Add("Rotate Left", defaultRotateNegative);
-        keys.Add("Rotate Right", defaultRotatePositive);
-        keys.Add("Up", defaultVerticalPositive);
-        keys.Add("Down", defaultVerticalNegative);
-        keys.Add("Fire Main", defaultMainWeaponKey);
-        keys.Add("Fire Left", defaultLeftWeaponKey);
-        keys.Add("Fire Right", defaultRightWeaponKey);
-        keys.Add("Speed Burst", defaultSpeedBurstKey);
+        keys.Add(Controls.Forward, defaultForwardPositive);
+        keys.Add(Controls.Reverse, defaultForwardNegative);
+        keys.Add(Controls.RotateLeft, defaultRotateNegative);
+        keys.Add(Controls.RotateRight, defaultRotatePositive);
+        keys.Add(Controls.Up, defaultVerticalPositive);
+        keys.Add(Controls.Down, defaultVerticalNegative);
+        keys.Add(Controls.FireMain, defaultMainWeaponKey);
+        keys.Add(Controls.FireLeft, defaultLeftWeaponKey);
+        keys.Add(Controls.FireRight, defaultRightWeaponKey);
+        keys.Add(Controls.SpeedBurst, defaultSpeedBurstKey);
     }
-    public void SetKeyCode(string control, KeyCode key)
+    public void SetKeyCode(Controls control, KeyCode key)
     {
         keys[control] = key;
     }
 
-    public KeyCode GetKeyCode(string control)
+    public KeyCode GetKeyCode(Controls control)
     {
         return keys[control];
     }
     public void SetKeysToDefault()
     {
-        SetKeyCode("Forward", KeyCode.W);
-        SetKeyCode("Reverse", KeyCode.S);
-        SetKeyCode("Rotate Left", KeyCode.A);
-        SetKeyCode("Rotate Right", KeyCode.D);
-        SetKeyCode("Up", KeyCode.UpArrow);
-        SetKeyCode("Down", KeyCode.DownArrow);
-        SetKeyCode("Fire Main", KeyCode.Space);
-        SetKeyCode("Fire Left", KeyCode.LeftArrow);
-        SetKeyCode("Fire Right", KeyCode.RightArrow);
-        SetKeyCode("Speed Burst", KeyCode.LeftShift);
+        SetKeyCode(Controls.Forward, KeyCode.W);
+        SetKeyCode(Controls.Reverse, KeyCode.S);
+        SetKeyCode(Controls.RotateLeft, KeyCode.A);
+        SetKeyCode(Controls.RotateRight, KeyCode.D);
+        SetKeyCode(Controls.Up, KeyCode.UpArrow);
+        SetKeyCode(Controls.Down, KeyCode.DownArrow);
+        SetKeyCode(Controls.FireMain, KeyCode.Space);
+        SetKeyCode(Controls.FireLeft, KeyCode.LeftArrow);
+        SetKeyCode(Controls.FireRight, KeyCode.RightArrow);
+        SetKeyCode(Controls.SpeedBurst, KeyCode.LeftShift);
     }
 
     public void UpdateControls()
     {
-        SetKeyCode("Forward", keys["Forward"]);
-        SetKeyCode("Reverse", keys["Reverse"]);
-        SetKeyCode("Rotate Left", keys["Rotate Left"]);
-        SetKeyCode("Rotate Right", keys["Rotate Right"]);
-        SetKeyCode("Up", keys["Up"]);
-        SetKeyCode("Down", keys["Down"]);
-        SetKeyCode("Fire Main", keys["Fire Main"]);
-        SetKeyCode("Fire Left", keys["Fire Left"]);
-        SetKeyCode("Fire Right", keys["Fire Right"]);
-        SetKeyCode("Speed Burst", keys["Speed Burst"]);
+        SetKeyCode(Controls.Forward, keys[Controls.Forward]);
+        SetKeyCode(Controls.Reverse, keys[Controls.Reverse]);
+        SetKeyCode(Controls.RotateLeft, keys[Controls.RotateLeft]);
+        SetKeyCode(Controls.RotateRight, keys[Controls.RotateRight]);
+        SetKeyCode(Controls.Up, keys[Controls.Up]);
+        SetKeyCode(Controls.Down, keys[Controls.Down]);
+        SetKeyCode(Controls.FireMain, keys[Controls.FireMain]);
+        SetKeyCode(Controls.FireLeft, keys[Controls.FireLeft]);
+        SetKeyCode(Controls.FireRight, keys[Controls.FireRight]);
+        SetKeyCode(Controls.SpeedBurst, keys[Controls.SpeedBurst]);
     }
 }

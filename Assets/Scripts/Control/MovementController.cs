@@ -60,11 +60,11 @@ namespace AirShip.Control
         void Update()
         {
             // Control Inputs
-            inputs.x = CalculateInputAxis(Input.GetKey(controls.GetKeyCode("Rotate Right")), Input.GetKey(controls.GetKeyCode("Rotate Left")), inputs.x);
-            inputs.z = CalculateInputAxis(Input.GetKey(controls.GetKeyCode("Forward")), Input.GetKey(controls.GetKeyCode("Reverse")), inputs.z);
-            inputs.y = CalculateInputAxis(Input.GetKey(controls.GetKeyCode("Up")), Input.GetKey(controls.GetKeyCode("Down")), inputs.y); 
+            inputs.x = CalculateInputAxis(Input.GetKey(controls.GetKeyCode(Controls.RotateRight)), Input.GetKey(controls.GetKeyCode(Controls.RotateLeft)), inputs.x);
+            inputs.z = CalculateInputAxis(Input.GetKey(controls.GetKeyCode(Controls.Forward)), Input.GetKey(controls.GetKeyCode(Controls.Reverse)), inputs.z);
+            inputs.y = CalculateInputAxis(Input.GetKey(controls.GetKeyCode(Controls.Up)), Input.GetKey(controls.GetKeyCode(Controls.Down)), inputs.y); 
             
-            if(Input.GetKeyDown(controls.GetKeyCode("Speed Burst")) && !burstActive)
+            if(Input.GetKeyDown(controls.GetKeyCode(Controls.SpeedBurst)) && !burstActive)
             {
                 StartCoroutine(SpeedBurst());
             }
@@ -87,9 +87,7 @@ namespace AirShip.Control
                 rigidBody.velocity = movementVector * 100;
                 // rigidBody.AddForce(movementVector*100);
 
-                //Add rotation with RotateAround or Torue? TODO
                 rigidBody.transform.RotateAround(rigidBody.transform.position, Vector3.up, rotationAmount);
-                // rigidBody.AddTorque(transform.up * rotationAmount * 100);
                 float movementSpeed = movementVector.magnitude;
                 // animator.SetFloat("MoveSpeed", movementVector.magnitude*1.66f);
 

@@ -10,7 +10,7 @@ namespace AirShip.UI
     public class ControlsMenu : MonoBehaviour
     {
         // private Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
-        private GameObject currentKey;
+        private KeyMapButton currentKey;
 
         public TextMeshProUGUI forward, reverse, rotateLeft, rotateRight, up, down, mainFire, leftFire, rightFire, speedBurst; 
         [SerializeField] Color32 normalColour;
@@ -25,16 +25,16 @@ namespace AirShip.UI
 
         private void UpdateButtonText()
         {
-            forward.text = controls.GetKeyCode("Forward").ToString();
-            reverse.text = controls.GetKeyCode("Reverse").ToString();
-            rotateLeft.text = controls.GetKeyCode("Rotate Left").ToString();
-            rotateRight.text = controls.GetKeyCode("Rotate Right").ToString();
-            up.text = controls.GetKeyCode("Up").ToString();
-            down.text = controls.GetKeyCode("Down").ToString();
-            mainFire.text = controls.GetKeyCode("Fire Main").ToString();
-            leftFire.text = controls.GetKeyCode("Fire Left").ToString();
-            rightFire.text = controls.GetKeyCode("Fire Right").ToString();
-            speedBurst.text = controls.GetKeyCode("Speed Burst").ToString();
+            forward.text = controls.GetKeyCode(Controls.Forward).ToString();
+            reverse.text = controls.GetKeyCode(Controls.Reverse).ToString();
+            rotateLeft.text = controls.GetKeyCode(Controls.RotateLeft).ToString();
+            rotateRight.text = controls.GetKeyCode(Controls.RotateRight).ToString();
+            up.text = controls.GetKeyCode(Controls.Up).ToString();
+            down.text = controls.GetKeyCode(Controls.Down).ToString();
+            mainFire.text = controls.GetKeyCode(Controls.FireMain).ToString();
+            leftFire.text = controls.GetKeyCode(Controls.FireLeft).ToString();
+            rightFire.text = controls.GetKeyCode(Controls.FireRight).ToString();
+            speedBurst.text = controls.GetKeyCode(Controls.SpeedBurst).ToString();
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace AirShip.UI
                 Event e =Event.current;
                 if(e.isKey)
                 {
-                    controls.SetKeyCode(currentKey.name, e.keyCode);
+                    controls.SetKeyCode(currentKey.controlReference, e.keyCode); 
                     currentKey.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = e.keyCode.ToString();
                     currentKey.GetComponent<Image>().color = normalColour;
                     UpdateControls();
@@ -57,7 +57,7 @@ namespace AirShip.UI
             }
         }
 
-        public void ChangeKey(GameObject clicked)
+        public void ChangeKey(KeyMapButton clicked)
         {
             if(currentKey != null)
             {

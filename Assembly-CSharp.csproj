@@ -86,8 +86,10 @@
      <Compile Include="Assets\Scripts\Combat\TurretLocations.cs" />
      <Compile Include="Assets\Scripts\Combat\TurretSize.cs" />
      <Compile Include="Assets\Scripts\Combat\TurretSlot.cs" />
+     <Compile Include="Assets\Scripts\Control\Controls.cs" />
      <Compile Include="Assets\Scripts\Control\ControlsKeyMapping.cs" />
      <Compile Include="Assets\Scripts\Control\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\Control\KeyMapButton.cs" />
      <Compile Include="Assets\Scripts\Control\MovementController.cs" />
      <Compile Include="Assets\Scripts\Control\PatrolPath.cs" />
      <Compile Include="Assets\Scripts\Inventory\Armour.cs" />

@@ -26,15 +26,15 @@ namespace AirShip.Combat
         void Update()
         {
             //Weapons input
-            if(Input.GetKeyDown(controls.GetKeyCode("Fire Main")))
+            if(Input.GetKeyDown(controls.GetKeyCode(Controls.FireMain)))
             {
                 FireMainWeapon();
             }
-            if(Input.GetKeyDown(controls.GetKeyCode("Fire Right")))
+            if(Input.GetKeyDown(controls.GetKeyCode(Controls.FireRight)))
             {
                 FireRightWeapon();
             }
-            if(Input.GetKeyDown(controls.GetKeyCode("Fire Left")))
+            if(Input.GetKeyDown(controls.GetKeyCode(Controls.FireLeft)))
             {
                 FireLeftWeapon();
             }
@@ -47,11 +47,7 @@ namespace AirShip.Combat
             {
                 if(slot.GetLocation() == TurretLocations.Main)
                 {
-                    Turret turret = slot.GetComponentInChildren<Turret>();
-                    if(turret != null)
-                    {
-                        turret.Fire();
-                    }
+                    FireTurret(slot);
                 }
             }
         }
@@ -63,11 +59,7 @@ namespace AirShip.Combat
             {
                 if(slot.GetLocation() == TurretLocations.Right)
                 {
-                    Turret turret = slot.GetComponentInChildren<Turret>();
-                    if(turret != null)
-                    {
-                        turret.Fire();
-                    }
+                    FireTurret(slot);
                 }
             }
         }
@@ -79,12 +71,17 @@ namespace AirShip.Combat
             {
                 if(slot.GetLocation() == TurretLocations.Left)
                 {
-                    Turret turret = slot.GetComponentInChildren<Turret>();
-                    if(turret != null)
-                    {
-                        turret.Fire();
-                    }
+                    FireTurret(slot);
                 }
+            }
+        }
+
+        private static void FireTurret(TurretSlot slot)
+        {
+            Turret turret = slot.GetComponentInChildren<Turret>();
+            if (turret != null)
+            {
+                turret.Fire();
             }
         }
     }

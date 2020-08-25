@@ -3920,6 +3920,17 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2590789834048886455, guid: 439cd98811c3c4f4780bb8c062b54efa,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+        type: 2}
+    - target: {fileID: 2590789834048886455, guid: 439cd98811c3c4f4780bb8c062b54efa,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 2619392163778225067, guid: 439cd98811c3c4f4780bb8c062b54efa,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -4258,6 +4269,31 @@ PrefabInstance:
     - target: {fileID: 4067735022419735083, guid: 439cd98811c3c4f4780bb8c062b54efa,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074281414257390135, guid: 439cd98811c3c4f4780bb8c062b54efa,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074281414257390135, guid: 439cd98811c3c4f4780bb8c062b54efa,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074281414257390135, guid: 439cd98811c3c4f4780bb8c062b54efa,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074281414257390135, guid: 439cd98811c3c4f4780bb8c062b54efa,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074281414257390135, guid: 439cd98811c3c4f4780bb8c062b54efa,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4140040847163190893, guid: 439cd98811c3c4f4780bb8c062b54efa,
