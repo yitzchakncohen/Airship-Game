@@ -5,21 +5,21 @@ namespace AirShip.Combat
 {
     public class CombatController : MonoBehaviour
     {
+        //This class controls firing of weapons. 
         ControlsKeyMapping controls;
         TurretSlot[] turretSlots;
 
-        // Start is called before the first frame update
         void Start()
         {
             //Find Turret slots
             GetTurrets();
             //Get controls component
-            controls = GameObject.FindObjectOfType<ControlsKeyMapping>();
+            controls = GetComponentInChildren<ControlsKeyMapping>();
         }
 
         private void GetTurrets()
         {
-            turretSlots = FindObjectsOfType<TurretSlot>();
+            turretSlots = GetComponentsInChildren<TurretSlot>();
         }
 
         // Update is called once per frame
@@ -78,9 +78,11 @@ namespace AirShip.Combat
 
         private static void FireTurret(TurretSlot slot)
         {
+            //Get the turret in the slot.
             Turret turret = slot.GetComponentInChildren<Turret>();
             if (turret != null)
             {
+                //Fire!
                 turret.Fire();
             }
         }
