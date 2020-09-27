@@ -45,6 +45,9 @@ namespace GameDevTV.UI.Inventories
             if (!equipableItem.GetAllowedEquipLocation().Contains(equipLocation)) return 0;
             if (GetItem() != null) return 0;
 
+            // Check if player has enough equip points
+            if((playerEquipment.GetEquipPoints() - playerEquipment.EquipPointsTotal()) < item.GetEquipPointsNeeded()) return 0;
+
             return 1;
         }
 

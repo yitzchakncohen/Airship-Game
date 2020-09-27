@@ -35,6 +35,7 @@ namespace AirShip.Combat
 
             // Check for shields even if there is no equipment.
             CheckShield();
+            CheckArmour();
         }
 
         void Update()
@@ -79,26 +80,31 @@ namespace AirShip.Combat
 
         private void CheckArmour()
         {
-            ArmourItem armourItem = equipment.GetItemInSlot(EquipLocation.Armour) as ArmourItem;
-            if(armourItem)
+            if(equipment)
             {
-                //Add armour health to player health.
-                maxHealthPoints = baseMaxHealthPoints + armourItem.GetArmourAmount();
-                healthPoints = healthPoints + armourItem.GetArmourAmount();
-                lastArmourValue = armourItem.GetArmourAmount();
-            }
-            if(!armourItem)
-            {
-                //If armour was removed, remove health bonus.
-                healthPoints = healthPoints - lastArmourValue;
-                maxHealthPoints = baseMaxHealthPoints;
-                lastArmourValue = 0f;
+                ArmourItem armourItem = equipment.GetItemInSlot(EquipLocation.Armour) as ArmourItem;
+            
+                if(armourItem)
+                {
+                    //Add armour health to player health.
+                    maxHealthPoints = baseMaxHealthPoints + armourItem.GetArmourAmount();
+                    healthPoints = healthPoints + armourItem.GetArmourAmount();
+                    lastArmourValue = armourItem.GetArmourAmount();
+                }
+                if(!armourItem)
+                {
+                    //If armour was removed, remove health bonus.
+                    healthPoints = healthPoints - lastArmourValue;
+                    maxHealthPoints = baseMaxHealthPoints;
+                    lastArmourValue = 0f;
+                }
             }
         }
 
         private void CheckShield()
         {
-            //Check for a shielf and set the Health gameObject the shield is a child of.
+            //Check for a shield and tell the shield which gameObject it's attached to. 
+            //This is here because all Players and NPCs have a health script. 
             shields = this.GetComponentsInChildren<Shield>();
             foreach (Shield shield in shields)
             {

@@ -27,6 +27,7 @@ namespace GameDevTV.Inventories
         [SerializeField] Pickup pickup = null;
         [Tooltip("If true, multiple items of this type can be stacked in the same inventory slot.")]
         [SerializeField] bool stackable = false;
+        [SerializeField] int equipPointsNeeded = 1;
 
         // STATE
         static Dictionary<string, InventoryItem> itemLookupCache;
@@ -98,9 +99,19 @@ namespace GameDevTV.Inventories
             return displayName;
         }
 
-        public string GetDescription()
+        public virtual string GetDescription()
         {
             return description;
+        }
+
+        public string GetBaseDescription()
+        {
+            return description;
+        }
+
+        public int GetEquipPointsNeeded()
+        {
+            return equipPointsNeeded;
         }
 
         // PRIVATE

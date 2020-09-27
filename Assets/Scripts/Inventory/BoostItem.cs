@@ -9,9 +9,9 @@ namespace AirShip.Inventory
     {
         [SerializeField] GameObject boost;
         [SerializeField] GameObject boostFX;
-        [SerializeField] float speedBurstMultiplier;
-        [SerializeField] float burstLength;
-        [SerializeField] float burstCoolDown;
+        [SerializeField] float speedBurstMultiplier = 2f;
+        [SerializeField] float burstLength = 3f;
+        [SerializeField] float burstCoolDown = 3f;
         // Start is called before the first frame update
         public float GetBurst()
         {

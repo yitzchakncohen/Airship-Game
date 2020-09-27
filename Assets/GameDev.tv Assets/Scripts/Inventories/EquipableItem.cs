@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,18 @@ namespace GameDevTV.Inventories
         public List<EquipLocation> GetAllowedEquipLocation()
         {
             return allowedEquipLocations;
+        }
+
+        public override string GetDescription()
+        {
+            string locationsList = null;
+            foreach (var location in allowedEquipLocations)
+            {
+                locationsList = (locationsList + "/n   " + location.ToString() + " ").Replace("/n", Environment.NewLine);
+            }
+            return (GetBaseDescription() 
+                + "/nEquip Locations: " + locationsList
+                + "/nEquip Points: " + GetEquipPointsNeeded()).Replace("/n", Environment.NewLine);
         }
     }
 }

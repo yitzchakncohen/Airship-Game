@@ -18,5 +18,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: eb5f6e2757c821940b69cf1456f7865a, type: 3}
   pickup: {fileID: 7080590082509598332, guid: 2d96cf586e75d6645a0193d2f02d17db, type: 3}
   stackable: 0
+  equipPointsNeeded: 8
   allowedEquipLocations: 00000000
   turret: {fileID: 4358638264602310354, guid: 66738eb93c0abb847b1b79df7b4d87b2, type: 3}

@@ -15,6 +15,7 @@ namespace GameDevTV.Inventories
     {
         // STATE
         Dictionary<EquipLocation, EquipableItem> equippedItems = new Dictionary<EquipLocation, EquipableItem>();
+        [SerializeField] int equipPointsAllowed = 10;
 
         // PUBLIC
 
@@ -60,6 +61,21 @@ namespace GameDevTV.Inventories
             {
                 equipmentUpdated();
             }
+        }
+
+        public int EquipPointsTotal()
+        {
+            int equipPointsTotal = 0;
+            foreach (var item in equippedItems)
+            {
+                equipPointsTotal += item.Value.GetEquipPointsNeeded();
+            }
+            return equipPointsTotal;
+        }
+
+        public int GetEquipPoints()
+        {
+            return equipPointsAllowed;
         }
 
         // PRIVATE

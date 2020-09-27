@@ -6,7 +6,7 @@ namespace AirShip.Inventory
     public class Turret : MonoBehaviour
     {
         [SerializeField] GameObject projectile;
-        public float range;
+        public float range = 100f;
         [SerializeField] TurretSize turretSize;
         public Health turretParent;
 
